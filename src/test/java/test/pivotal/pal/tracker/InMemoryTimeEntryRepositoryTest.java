@@ -5,6 +5,7 @@ import io.pivotal.pal.tracker.TimeEntry;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -43,14 +44,17 @@ public class InMemoryTimeEntryRepositoryTest {
                 new TimeEntry(1L, 123L, 456L, LocalDate.parse("2017-01-08"), 8),
                 new TimeEntry(2L, 789L, 654L, LocalDate.parse("2017-01-07"), 4)
         );
-        assertThat(repo.list()).isEqualTo(expected);
+        System.out.println("expected: " + expected);
+        List<TimeEntry> actual = repo.list();
+        System.out.println("actual: " + actual + " and size " + actual.size());
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void update() throws Exception {
         InMemoryTimeEntryRepository repo = new InMemoryTimeEntryRepository();
         TimeEntry created = repo.create(new TimeEntry(123L, 456L, LocalDate.parse("2017-01-08"), 8));
-
+        System.out.println("getID" + created.getId());
         TimeEntry updatedEntry = repo.update(
                 created.getId(),
                 new TimeEntry(321L, 654L, LocalDate.parse("2017-01-09"), 5));
