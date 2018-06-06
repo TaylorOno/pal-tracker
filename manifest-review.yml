@@ -6,3 +6,5 @@ applications:
   - route: to-pal-tracker-review.apps.pikes.pal.pivotal.io
   services:
     - tracker-database
+  env:
+    MANAGEMENT_SECURITY_ENABLED: false
